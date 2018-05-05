@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd//mybatis-3-mapper.dtd">
+<mapper namespace="ClassDao">
+
+	<insert id="addClass" parameterType="ClassEntity">
+		INSERT INTO tb_class(f_class_id , f_class_name)
+		VALUES (#{classId},#{className});
+	</insert>
+	
+	<update id="updateClass" parameterType="ClassEntity">
+		UPDATE tb_class SET
+		f_class_name = #{className}
+		WHERE f_class_id = #{classId};
+	</update>
+	
+	<delete id="deleteClass" parameterType="ClassEntity">
+		DELETE FROM tb_class
+		WHERE f_class_id = #{classId};
+	</delete>
+	
+	<select id="getClassByName" parameterType="String" resultMap="classMap">
+		SELECT f_class_id , f_class_name
+		FROM tb_class
+		WHERE f_class_name = #{className} ;
+	</select>
+	
+	<select id="getClassById" parameterType="String" resultMap="classMap">
+		SELECT f_class_id , f_class_name
+		FROM tb_class
+		WHERE f_class_id = #{classId} ;
+	</select>
+	
+	<resultMap type="ClassEntity" id="classMap">
+		<id column="f_class_id" property="classId" />
+		<result column="f_class_name" property="className" />
+	</resultMap>
+	
+</mapper>

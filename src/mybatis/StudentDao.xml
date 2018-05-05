@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd//mybatis-3-mapper.dtd">
+<mapper namespace="StudentDao">
+
+	<insert id="addStudent" parameterType="StudentEntity">
+		INSERT INTO tb_student(f_student_number,f_student_name,f_class_id)
+		VALUES(#{studentNumber},#{studentName},#{classInfo.classId})
+	</insert>
+	
+	<update id="updateStudent" parameterType="StudentEntity">
+		UPDATE tb_student SET 
+		f_student_name = #{studentNameS},
+		f_class_id = #{classInfo.classId}
+		WHERE f_student_number = #{studentNumber};
+	</update>
+	
+	<delete id="deleteStudent" parameterType="StudentEntity">
+		DELETE FROM tb_student 
+		WHERE f_student_number = #{studentNumber};
+	</delete>
+	
+	<select id="getStudentByNumber" parameterType="String" resultMap="studentMap">
+		SELECT f_student_number,f_student_name,f_class_id 
+		FROM tb_student
+		WHERE f_student_number = #{studentNumber};
+	</select>
+	
+	<select id="getAllStudent"  parameterType="String" resultMap="studentMap">
+		SELECT f_student_number,f_student_name,f_class_id 
+		FROM tb_student;
+	</select>
+	
+	<resultMap type="StudentEntity" id="studentMap">
+		<id column="f_student_number" property="studentNumber" />
+		<result column="f_student_name" property="studentName" />
+		<association column="f_class_id" property="classInfo" select="ClassDao.getClassById" />
+	</resultMap>
+	
+</mapper>

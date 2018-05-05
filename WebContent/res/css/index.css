@@ -1,0 +1,31 @@
+body{
+	padding: 30px;
+}
+
+.table{
+	width: 80%;
+	margin: 20px auto;
+	text-align: center;
+}
+
+.table th{
+	border: 0px;
+	margin: 0px;
+	border-bottom: 2px solid #dedede;
+}	
+
+input {
+	height :20px;
+	margin:10px;
+	border-radius: 3px;
+	border: 1px solid #52bde5;
+}
+
+button {
+	width: 150px;
+	height:30px;
+	margin: 20px;
+	background: #52bde5;
+	border: none;
+	color: #ffffff;
+}
